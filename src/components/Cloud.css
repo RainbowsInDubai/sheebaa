@@ -1,0 +1,16 @@
+/* App.css */
+.cloud {
+  position: absolute;
+  max-width: 20vh;
+  width: 300px;
+  animation: moveCloud 40s linear infinite;
+}
+
+@keyframes moveCloud {
+  from {
+    left: -100%; /* Start off-screen to the left */
+  }
+  to {
+    left: 100%; /* End off-screen to the right */
+  }
+}
