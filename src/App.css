@@ -1,0 +1,122 @@
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+} */
+
+/* .card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Hide any overflow to prevent scrollbars */
+}
+
+.grassContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.middleGrassContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.grassPatchContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2px;
+}
+
+.grassPatch {
+  width: 40px;
+  height: 100px;
+  /* background: green; */
+  background-image: url("grass.webp");
+  background-position: top center;
+  background-size: cover;
+  animation: sway 5s infinite;
+}
+
+.grassPatchMiddle {
+  width: 40px;
+  height: 100px;
+  background: darkgreen;
+  animation: swayMiddle 10s infinite;
+}
+
+/* App.css */
+.cloud {
+  position: absolute;
+  width: 300px; /* Adjust size as needed */
+  animation: moveCloud 40s linear infinite;
+}
+
+@keyframes moveCloud {
+  from {
+    left: -100%; /* Start off-screen to the left */
+  }
+  to {
+    left: 100%; /* End off-screen to the right */
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes swayMiddle {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
