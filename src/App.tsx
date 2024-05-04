@@ -21,12 +21,12 @@ const App = () => {
       ]);
       setCloudId(newId);
 
-      // Set a timeout to remove the cloud after 15 seconds
+      // Set a timeout to remove the cloud after 40 seconds
       setTimeout(() => {
         setClouds((prevClouds) =>
           prevClouds.filter((cloud) => cloud.id !== newId)
         );
-      }, 15000); // Ensure this matches the animationDuration
+      }, 40000); // Ensure this matches the animationDuration
     }, 4000);
 
     return () => clearInterval(interval);
@@ -95,19 +95,31 @@ const App = () => {
 
       <div className="middleGrassContainer">
         <div className="grassPatchContainer">
-          {generateGrassPatchesLeft(40, "grassPatchMiddle")}
+          {generateGrassPatchesLeft({
+            heightMultiplier: 40,
+            className: "grassPatchMiddle",
+          })}
         </div>
         <div className="grassPatchContainer">
-          {generateGrassPatchesRight(40, "grassPatchMiddle")}
+          {generateGrassPatchesRight({
+            heightMultiplier: 40,
+            className: "grassPatchMiddle",
+          })}
         </div>
       </div>
 
       <div className="grassContainer">
         <div className="grassPatchContainer">
-          {generateGrassPatchesLeft(20)}
+          {generateGrassPatchesLeft({
+            heightMultiplier: 20,
+            className: "grassPatch",
+          })}
         </div>
         <div className="grassPatchContainer">
-          {generateGrassPatchesRight(20)}
+          {generateGrassPatchesRight({
+            heightMultiplier: 20,
+            className: "grassPatch",
+          })}
         </div>
       </div>
     </div>
