@@ -1,16 +1,45 @@
 // src/App.tsx
-import React from "react";
+import { ReactElement, useEffect, useState } from "react";
 
-import Cloud from "./Cloud";
+import Cloud from "./components/Cloud";
 
-const App: React.FC = () => {
-  //!SECTION
+const App = () => {
+  const [clouds, setClouds] = useState<{ id: number; element: ReactElement }[]>(
+    []
+  );
+  const [cloudId, setCloudId] = useState(0);
 
-  const generateGrassPatchesLeft = (
-    heightMultiplier: number,
-    className: string
-  ) => {
-    const patchHolder = [];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newId = cloudId + 1;
+      const newCloud = (
+        <Cloud key={newId} style={{ animationDuration: "40s" }} />
+      );
+      setClouds((prevClouds) => [
+        ...prevClouds,
+        { id: newId, element: newCloud },
+      ]);
+      setCloudId(newId);
+
+      // Set a timeout to remove the cloud after 40 seconds
+      setTimeout(() => {
+        setClouds((prevClouds) =>
+          prevClouds.filter((cloud) => cloud.id !== newId)
+        );
+      }, 40000); // Ensure this matches the animationDuration
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [cloudId]);
+
+  const generateGrassPatchesLeft = ({
+    heightMultiplier,
+    className,
+  }: {
+    heightMultiplier: number;
+    className: string;
+  }) => {
+    const patchHolder: ReactElement[] = [];
 
     for (let i = 20; i >= 0; i--) {
       patchHolder.push(
@@ -23,14 +52,17 @@ const App: React.FC = () => {
         />
       );
     }
-    console.log("left", patchHolder);
+
     return patchHolder;
   };
 
-  const generateGrassPatchesRight = (
-    heightMultiplier: number,
-    className: string
-  ) => {
+  const generateGrassPatchesRight = ({
+    heightMultiplier,
+    className,
+  }: {
+    heightMultiplier: number;
+    className: string;
+  }) => {
     const patchHolder = [];
 
     for (let i = 0; i <= 20; i++) {
@@ -44,7 +76,7 @@ const App: React.FC = () => {
         />
       );
     }
-    console.log("right", patchHolder);
+
     return patchHolder;
   };
 
@@ -58,60 +90,36 @@ const App: React.FC = () => {
           paddingTop: 100,
         }}
       >
-        <Cloud />
-        <Cloud style={{ top: "20vh", animationDuration: "12s" }} />
-        <Cloud
-          style={{
-            top: "40vh",
-            animationDuration: "15s",
-            animationDelay: "2s",
-          }}
-        />
-        <Cloud
-          style={{
-            top: "40vh",
-            animationDuration: "15s",
-            animationDelay: "2.2s",
-          }}
-        />
-        <Cloud
-          style={{
-            top: "60vh",
-            animationDuration: "10s",
-            animationDelay: "3s",
-          }}
-        />
-        <Cloud
-          style={{
-            top: "80vh",
-            animationDuration: "10s",
-            animationDelay: "4s",
-          }}
-        />
-        <Cloud
-          style={{
-            top: "60vh",
-            animationDuration: "10s",
-            animationDelay: "5s",
-          }}
-        />
+        {clouds.map((cloud) => cloud.element)}
       </div>
 
       <div className="middleGrassContainer">
         <div className="grassPatchContainer">
-          {generateGrassPatchesLeft(40, "grassPatchMiddle")}
+          {generateGrassPatchesLeft({
+            heightMultiplier: 40,
+            className: "grassPatchMiddle",
+          })}
         </div>
         <div className="grassPatchContainer">
-          {generateGrassPatchesRight(40, "grassPatchMiddle")}
+          {generateGrassPatchesRight({
+            heightMultiplier: 40,
+            className: "grassPatchMiddle",
+          })}
         </div>
       </div>
 
       <div className="grassContainer">
         <div className="grassPatchContainer">
-          {generateGrassPatchesLeft(20)}
+          {generateGrassPatchesLeft({
+            heightMultiplier: 20,
+            className: "grassPatch",
+          })}
         </div>
         <div className="grassPatchContainer">
-          {generateGrassPatchesRight(20)}
+          {generateGrassPatchesRight({
+            heightMultiplier: 20,
+            className: "grassPatch",
+          })}
         </div>
       </div>
     </div>

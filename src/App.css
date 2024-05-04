@@ -85,22 +85,6 @@
   animation: swayMiddle 10s infinite;
 }
 
-/* App.css */
-.cloud {
-  position: absolute;
-  width: 300px; /* Adjust size as needed */
-  animation: moveCloud 40s linear infinite;
-}
-
-@keyframes moveCloud {
-  from {
-    left: -100%; /* Start off-screen to the left */
-  }
-  to {
-    left: 100%; /* End off-screen to the right */
-  }
-}
-
 @keyframes sway {
   0%,
   100% {
